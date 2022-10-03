@@ -1,0 +1,17 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+metadata:
+  name: skaffold-poc
+build:
+  local:
+    push: false  # skip pushing images. 
+  artifacts:
+  - image: skaffold-poc
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  #kubeContext: docker-desktop # this is not working, use cli argument
+  kubectl:
+    manifests:
+    - k8s-pod.yml
+    - k8s-service.yml
